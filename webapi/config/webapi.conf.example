@@ -1,2 +1,4 @@
 # Database connection string
 database_uri 'mysql2://localhost/tiny_web_example?user=root'
+
+#add testcode
