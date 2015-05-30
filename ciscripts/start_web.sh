@@ -42,6 +42,6 @@ do
 
     sleep 25
 
-    scp -oStrictHostKeyChecking=no -i ${SSH} install_web.sh $IP:
+    scp -oStrictHostKeyChecking=no -i ${SSH} install_web.sh root@$IP:
     ssh -oStrictHostKeyChecking=no -i ${SSH} root@$IP bash install_web.sh $DB
 done
