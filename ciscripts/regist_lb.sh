@@ -8,7 +8,7 @@ set -o pipefail
 FILE=$1
 NUM=$2
 
-LB_ID=
+LB_ID=lb-mkuhkuv3
 
 # TODO :まず、LBに登録されている既存のVIFを掃除しなければならない
 

@@ -8,15 +8,15 @@ set -o pipefail
 
 FILE=$1
 
-SSH=mykeypair
+SSH=/var/lib/mykeypair
 
-. ~/.musselrc
+. /etc/.musselrc
 
 NUM_CPU_CORE=1
 MEM_SIZE=256
 SSH_KEY=ssh-tegv6qve
 VDC_NAME="vdc-instance"`date +%Y%m%d-%H%M`
-VIFS=vifs.json
+VIFS=./ciscripts/vifs.json
 
 
 
