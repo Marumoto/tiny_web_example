@@ -29,7 +29,7 @@ yum install -y gcc openssl-devel libyaml-devel libffi-devel readline-devel zlib-
 git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 
 # build ruby
-rbenv install -v 2.0.0-p598
+CONFIGURE_OPTS="--disable-install-rdoc" rbenv install -v 2.0.0-p598
 rbenv rehash
 rbenv versions
 
