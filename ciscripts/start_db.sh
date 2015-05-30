@@ -37,5 +37,5 @@ retry_until [[ '"$(mussel instance show "${ID}" | egrep -w "^:state: running")"'
 
 sleep 25
 
-scp -oStrictHostKeyChecking=no -i ${SSH} install_db.sh root@$IP:
+scp -oStrictHostKeyChecking=no -i ${SSH} ./ciscripts/install_db.sh root@$IP:
 ssh -oStrictHostKeyChecking=no -i ${SSH} root@$IP bash install_db.sh
