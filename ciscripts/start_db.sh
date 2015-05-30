@@ -6,6 +6,8 @@ set -o pipefail
 # for using retry_until
 . ./wakame-vdc/retry.sh
 
+FILE=$1
+
 SSH=mykeypair
 
 . ~/.musselrc
@@ -27,6 +29,9 @@ IP=`mussel instance show $ID|grep :address |awk '{print $2}'`
 
 echo "instance_id : $ID"
 echo "IP address  : $IP"
+
+echo "DB_ID $ID" >$FILE
+echo "DB_IP $IP" >>$FILE
 
 retry_until [[ '"$(mussel instance show "${ID}" | egrep -w "^:state: running")"' ]]
 
