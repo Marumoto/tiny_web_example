@@ -3,6 +3,9 @@
 set -eu
 set -o pipefail
 
+# for using retry_until
+. ${BASH_SOURCE[0]%/*}/retry.sh
+
 . ~/.musselrc
 
 NUM_CPU_CORE=1
@@ -23,7 +26,7 @@ IP=`mussel instance show $ID|grep :address |awk '{print $2}'`
 echo "instance_id : $ID"
 echo "IP address  : $IP"
 
-scp install_db.sh $IP:
-ssh root@$IP bash install_db.sh
+retry_until [[ '"$(mussel instance show "${ID}" | egrep -w "^:state: running")"' ]]
 
-
+scp -i ${SSH_KEY} install_db.sh $IP:
+ssh -i ${SSH_KEY} root@$IP bash install_db.sh  $DB
