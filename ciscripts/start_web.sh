@@ -6,8 +6,7 @@ set -o pipefail
 $DB=$1
 
 # for using retry_until
-cd ${BASH_SOURCE[0]%/*}/wakame-vdc
-. ${BASH_SOURCE[0]%/*}/retry.sh
+. ./wakame-vdc/retry.sh
 
 . ~/.musselrc
 
