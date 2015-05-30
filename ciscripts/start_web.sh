@@ -32,7 +32,8 @@ echo "IP address  : $IP"
 
 retry_until [[ '"$(mussel instance show "${ID}" | egrep -w "^:state: running")"' ]]
 
-scp -i ${SSH} install_web.sh $IP:
-ssh -i ${SSH} root@$IP bash install_web.sh  $DB
 
+sleep 25
 
+scp -oStrictHostKeyChecking=no -i ${SSH} install_web.sh $IP:
+ssh -oStrictHostKeyChecking=no -i ${SSH} root@$IP bash install_web.sh $DB
