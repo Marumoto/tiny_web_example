@@ -19,9 +19,8 @@ yum -y install git
 
 # install rbenv
 git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
-echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
-echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
-source ~/.bash_profile
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 
 # isntall some packages for build ruby
 yum install -y gcc openssl-devel libyaml-devel libffi-devel readline-devel zlib-devel gdbm-devel ncurses-devel
@@ -73,7 +72,7 @@ cp tiny-web-example/* /etc/tiny-web-example/
 mkdir -p /var/log/tiny-web-example
 
 
-#cp tiny-web-example-webapi /etc/default/
+p#cp tiny-web-example-webapi /etc/default/
 #cp tiny-web-example-webapp /etc/default/
 
 # set DB_SERVER address to conf files.
