@@ -11,6 +11,8 @@ set -o pipefail
 
 DBSERVER_IP=$1
 
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 
 cd /opt/axsh/tiny-web-example/spec_integration
 bundle install
