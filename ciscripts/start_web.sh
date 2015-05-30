@@ -3,7 +3,7 @@
 set -eu
 set -o pipefail
 
-$DB=$1
+DB=$1
 
 # for using retry_until
 . ./wakame-vdc/retry.sh
