@@ -3,8 +3,7 @@
 set -exu
 set -o pipefail
 
-. ~/.musselrc
-
+. /etc/.musselrc
 FILE=$1
 NUM=$2
 

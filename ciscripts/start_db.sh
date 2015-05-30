@@ -18,6 +18,8 @@ SSH_KEY=ssh-tegv6qve
 VDC_NAME="vdc-instance"`date +%Y%m%d-%H%M`
 VIFS=./ciscripts/vifs.json
 
+export DCMGR_HOST=10.0.2.2
+export account_id=a-shpoolxx
 
 
 ID=`mussel instance create --hypervisor kvm --cpu-cores ${NUM_CPU_CORE} --image-id wmi-centos1d64 --memory-size ${MEM_SIZE} --ssh-key-id ${SSH_KEY} --display-name ${VDC_NAME} --vifs ${VIFS} | grep :id |awk '{print $2}'`
