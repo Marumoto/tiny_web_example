@@ -4,6 +4,7 @@ set -eu
 set -o pipefail
 
 # for using retry_until
+cd ${BASH_SOURCE[0]%/*}/wakame-vdc
 . ${BASH_SOURCE[0]%/*}/retry.sh
 
 . ~/.musselrc
