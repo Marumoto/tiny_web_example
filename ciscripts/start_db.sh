@@ -4,7 +4,7 @@ set -eu
 set -o pipefail
 
 # for using retry_until
-. ./wakame-vdc/retry.sh
+. ./ciscripts/wakame-vdc/retry.sh
 
 FILE=$1
 
