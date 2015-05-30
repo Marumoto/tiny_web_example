@@ -13,7 +13,7 @@ DB=$1
 SSH=mykeypair
 
 NUM_CPU_CORE=1
-MEM_SIZE=256
+MEM_SIZE=512
 SSH_KEY=ssh-tegv6qve
 VDC_NAME="vdc-instance"`date +%Y%m%d-%H%M`
 VIFS=vifs.json
