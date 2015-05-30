@@ -13,15 +13,15 @@ echo "DB_IP : $DB"
 # for using retry_until
 . ./ciscripts/wakame-vdc/retry.sh
 
-. ~/.musselrc
+. /etc/.musselrc
 
-SSH=mykeypair
+SSH=/var/lib/mykeypair
 
 NUM_CPU_CORE=1
 MEM_SIZE=512
 SSH_KEY=ssh-tegv6qve
 VDC_NAME="vdc-instance"`date +%Y%m%d-%H%M`
-VIFS=vifs.json
+VIFS=./ciscripts/vifs.json
 
 for i in $(seq 1 $NUM)
 do
