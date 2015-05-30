@@ -7,6 +7,8 @@ set -o pipefail
 cd ${BASH_SOURCE[0]%/*}/wakame-vdc
 . ${BASH_SOURCE[0]%/*}/retry.sh
 
+SSH=mykeypair
+
 . ~/.musselrc
 
 NUM_CPU_CORE=1
@@ -29,5 +31,5 @@ echo "IP address  : $IP"
 
 retry_until [[ '"$(mussel instance show "${ID}" | egrep -w "^:state: running")"' ]]
 
-scp -i ${SSH_KEY} install_db.sh $IP:
-ssh -i ${SSH_KEY} root@$IP bash install_db.sh  $DB
+scp -i ${SSH} install_db.sh $IP:
+ssh -i ${SSH} root@$IP bash install_db.sh  $DB
