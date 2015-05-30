@@ -43,8 +43,6 @@ gem install bundler --no-ri --no-rdoc
 
 # install tiny-web-example
 # TODO Should install by RPM
-curl -fsSkL https://raw.githubusercontent.com/axsh/tiny_web_example/master/rpmbuild/tiny-web-example.repo  -o /etc/yum.repos.d/tiny-web-example.repo
-
 git clone https://github.com/Marumoto/tiny_web_example.git
 mkdir -p /opt/axsh
 mv -i tiny_web_example /opt/axsh/tiny-web-example
@@ -72,14 +70,14 @@ cp tiny-web-example/* /etc/tiny-web-example/
 mkdir -p /var/log/tiny-web-example
 
 
-p#cp tiny-web-example-webapi /etc/default/
+#cp tiny-web-example-webapi /etc/default/
 #cp tiny-web-example-webapp /etc/default/
 
 # set DB_SERVER address to conf files.
 sed -i -e "s|localhost|${DBSERVER_IP}|g" /etc/tiny-web-example/webapi.conf /etc/tiny-web-example/webapp.yml
 
-# cd /opt/axsh/tiny-web-example/webapi/
-# bundle exec rake db:up
+cd /opt/axsh/tiny-web-example/webapi/
+bundle exec rake db:up
 
 # start App
 initctl start tiny-web-example-webapi RUN=yes
