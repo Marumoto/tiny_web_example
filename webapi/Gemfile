@@ -1,4 +1,6 @@
 # A sample Gemfile
+# test comment
+
 source "https://rubygems.org"
 
 gem "bundler"
