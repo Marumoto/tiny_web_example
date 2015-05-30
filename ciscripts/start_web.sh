@@ -11,7 +11,7 @@ echo "DB_IP : $DB"
 
 
 # for using retry_until
-. ./wakame-vdc/retry.sh
+. ./ciscripts/wakame-vdc/retry.sh
 
 . ~/.musselrc
 
