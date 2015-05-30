@@ -15,10 +15,10 @@ LB_ID=lb-mkuhkuv3
 while read LINE;
 do
     echo $LINE
-    if [ `echo $LINE | grep 'WEB'` ] ; then
+    if [ -n "`echo $LINE | grep 'WEB'`" ] ; then
         ID=`echo $LINE|awk '{print $1}'`
         IP=`echo $LINE|awk '{print $2}'`
-        VIF=`mussel instance show ${ID}|grep :vif_id|awk '{print $3}`
+        VIF=`mussel instance show ${ID}|grep :vif_id|awk '{print $3}'`
 
         mussel load_balancer register ${LB_ID} --vifs ${VIF}
         mussel load_balancer show ${LB_ID}
