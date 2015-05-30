@@ -9,6 +9,9 @@ NUM=$2
 DB=`cat $FILE|grep DB_IP |awk '{print $2}'`
 echo "DB_IP : $DB"
 
+export DCMGR_HOST=10.0.2.2
+export account_id=a-shpoolxx
+
 
 # for using retry_until
 . ./ciscripts/wakame-vdc/retry.sh
@@ -44,4 +47,7 @@ do
 
     scp -oStrictHostKeyChecking=no -i ${SSH} ./ciscripts/install_web.sh root@$IP:
     ssh -oStrictHostKeyChecking=no -i ${SSH} root@$IP bash install_web.sh $DB
+
+    scp -oStrictHostKeyChecking=no -i ${SSH} ./ciscripts/test_web.sh root@$IP:
+    ssh -oStrictHostKeyChecking=no -i ${SSH} root@$IP bash test_web.sh $DB
 done

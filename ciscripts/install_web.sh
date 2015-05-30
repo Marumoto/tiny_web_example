@@ -83,6 +83,8 @@ bundle exec rake db:up
 initctl start tiny-web-example-webapi RUN=yes
 initctl start tiny-web-example-webapp RUN=yes
 
+sleep 10
+
 # check webapi
 echo "checking webapi ...."
 curl -fs -X POST --data-urlencode display_name='webapi test' --data-urlencode comment='sample message.' http://localhost:8080/api/0.0.1/comments
