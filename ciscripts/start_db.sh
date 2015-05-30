@@ -30,5 +30,7 @@ echo "IP address  : $IP"
 
 retry_until [[ '"$(mussel instance show "${ID}" | egrep -w "^:state: running")"' ]]
 
+sleep 25
+
 scp -i ${SSH} install_db.sh $IP:
 ssh -i ${SSH} root@$IP bash install_db.sh
