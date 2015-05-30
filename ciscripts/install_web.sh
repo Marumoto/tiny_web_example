@@ -76,8 +76,8 @@ mkdir -p /var/log/tiny-web-example
 # set DB_SERVER address to conf files.
 sed -i -e "s|localhost|${DBSERVER_IP}|g" /etc/tiny-web-example/webapi.conf /etc/tiny-web-example/webapp.yml
 
-# cd /opt/axsh/tiny-web-example/webapi/
-# bundle exec rake db:up
+cd /opt/axsh/tiny-web-example/webapi/
+bundle exec rake db:up
 
 # start App
 initctl start tiny-web-example-webapi RUN=yes
