@@ -15,7 +15,8 @@
 set -exu
 set -o pipefail
 
-: $1 $2 # argument check
+FILE=$1
+NUM=$2 # 使用しない。厳密には、追加するVIF 数がこの値と等しいことを確認すべき
 
 # load-balancer のinstance id
 # 将来的にload-balancer の動的起動を行う場合は、
@@ -25,15 +26,14 @@ LB_ID=lb-mkuhkuv3
 # envs for mussel
 export DCMGR_HOST=10.0.2.2
 export account_id=a-shpoolxx
-
 . /etc/.musselrc
-FILE=$1
-NUM=$2
 
 
 # load-balancer に登録されているすべてのVIF を掃除する
 function clean_lb(){
+    set +e
     tmp=`mussel load_balancer show ${LB_ID} |grep network_vif_id |awk '{print $3}'`
+    set -e
     for vif in $tmp
     do
         echo "[CISCRIPT] Delete ${vif} from load balancer(${LB_ID})"
@@ -45,12 +45,12 @@ function clean_lb(){
 function regist_lb(){
     while read LINE;
     do
-        echo $LINE
+#        echo $LINE
         if [ -n "`echo $LINE | grep 'WEB'`" ] ; then
             ID=`echo $LINE|awk '{print $2}'`
             IP=`echo $LINE|awk '{print $3}'`
             VIF=`mussel instance show ${ID}|grep :vif_id|awk '{print $3}'`
-            echo "[CISCRIPT] Add ${vif} to load balancer(${LB_ID})"
+            echo "[CISCRIPT] Add ${VIF} to load balancer(${LB_ID})"
             mussel load_balancer register ${LB_ID} --vifs ${VIF} >/dev/null
         fi
     done <$FILE
