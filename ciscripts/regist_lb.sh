@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#############################################
+# usage : ./this.sh parameter_file num_of_web_server
+#############################################
+
 # load-balancer に登録されているVIF をクリーンアップした後、
 # $1 で渡されるファイルに記載のWeb サーバーのVIF を登録する。
 # 期待するファイルのフォーマット：
@@ -16,7 +20,7 @@ set -exu
 set -o pipefail
 
 FILE=$1
-NUM=$2 # 使用しない。厳密には、追加するVIF 数がこの値と等しいことを確認すべき
+NUM=$2  # Web サーバの数
 
 # load-balancer のinstance id
 # 将来的にload-balancer の動的起動を行う場合は、
@@ -56,10 +60,20 @@ function regist_lb(){
     done <$FILE
 }
 
+
+# load-balancer に登録されているVIF 数が$NUM と等しいかを確認する
+function check_lb(){
+    if [ `mussel load_balancer show ${LB_ID} |grep network_vif_id |awk '{print $3}'|wc -l` -ne ${NUM} ] ;then
+        echo "[CISCRIPT] Checking Load balancer failed"
+        exit 1
+    fi
+}
+
 function main(){
     clean_lb
     regist_lb
-    mussel load_balancer show ${LB_ID}
+    # mussel load_balancer show ${LB_ID}
+    check_lb
 }
 
 main
