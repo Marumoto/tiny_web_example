@@ -14,7 +14,6 @@ LB_ID=lb-mkuhkuv3
 
 # TODO :まず、LBに登録されている既存のVIFを掃除しなければならない
 
-
 while read LINE;
 do
     echo $LINE
