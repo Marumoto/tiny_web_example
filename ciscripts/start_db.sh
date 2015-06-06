@@ -37,7 +37,7 @@ IP=`mussel instance show ${ID}|grep :address |awk '{print $2}'`
 echo "instance_id : $ID"
 echo "IP address  : $IP"
 
-echo "DB ${IP} ${ID}" >$FILE # 新規生成
+echo "DB ${ID} ${IP}" >$FILE # 新規生成
 
 retry_until [[ '"$(mussel instance show "${ID}" | egrep -w "^:state: running")"' ]]
 
