@@ -1,22 +1,25 @@
 #!/bin/bash
 
+#############################################
+# usage : ./this.sh parameter_file num_of_web_server
+#############################################
+
 set -eux
 set -o pipefail
 
 FILE=$1
 NUM=$2
 
-DB=`cat $FILE|grep DB_IP |awk '{print $2}'`
-echo "DB_IP : $DB"
+DB=`cat $FILE|grep DB |awk '{print $3}'`
+echo "DB : $DB"
 
+# envs for mussel
+. /etc/.musselrc
 export DCMGR_HOST=10.0.2.2
 export account_id=a-shpoolxx
 
-
 # for using retry_until
 . ./ciscripts/wakame-vdc/retry.sh
-
-. /etc/.musselrc
 
 SSH=/var/lib/mykeypair
 
@@ -34,7 +37,6 @@ do
 
     IP=`mussel instance show $ID|grep :address |awk '{print $2}'`
 
-
     echo "instance_id : $ID"
     echo "IP address  : $IP"
 
@@ -42,12 +44,13 @@ do
 
     retry_until [[ '"$(mussel instance show "${ID}" | egrep -w "^:state: running")"' ]]
 
+    sleep 25 # wait for ssh daemon startup
 
-    sleep 25
-
+    # WEB サーバにssh して環境構築を行う
     scp -oStrictHostKeyChecking=no -i ${SSH} ./ciscripts/install_web.sh root@$IP:
     ssh -oStrictHostKeyChecking=no -i ${SSH} root@$IP bash install_web.sh $DB
 
+    # WEB サーバにssh してintegration-test を行う
     scp -oStrictHostKeyChecking=no -i ${SSH} ./ciscripts/test_web.sh root@$IP:
     ssh -oStrictHostKeyChecking=no -i ${SSH} root@$IP bash test_web.sh $DB
 done
