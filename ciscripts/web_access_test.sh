@@ -14,14 +14,13 @@ LB_IP=10.0.22.104
 cd /opt/axsh/tiny-web-example/spec_integration
 bundle install
 
-# check webapi
-echo "checking webapi ...."
-curl -fs -X POST --data-urlencode display_name='webapi test' --data-urlencode comment='sample message.' http://$LB_IP/api/0.0.1/comments
+#edit conf file
+cd /opt/axsh/tiny-web-example/spec_integration/config
+cp webapi.conf.example webapi.conf
 
-# check get command
-echo "checking GET ...."
-curl -fs -X GET http://$LB_IP/api/0.0.1/comments
+# set LB address to conf files.
+sed -i -e "s|localhost|${LB_IP}|g" /opt/axsh/tiny-web-example/spec_integration/config/webapi.conf
 
-# check get(show) command
-echo "checking GET(show) ...."
-curl -fs -X GET http://$LB_IP/api/0.0.1/comments/1
+#execute test
+cd /opt/axsh/tiny-web-example/spec_integration
+bundle exec rspec ./spec/webapi_integration_spec.rb
