@@ -10,6 +10,10 @@ set -o pipefail
 
 LB_IP=10.0.22.104
 
+#set path
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
 #install bundle
 cd /opt/axsh/tiny-web-example/spec_integration
 bundle install
