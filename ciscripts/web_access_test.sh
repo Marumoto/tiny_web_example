@@ -10,6 +10,10 @@ set -o pipefail
 
 LB_IP=10.0.22.104
 
+#install bundle
+cd /opt/axsh/tiny-web-example/spec_integration
+bundle install
+
 # check webapi
 echo "checking webapi ...."
 curl -fs -X POST --data-urlencode display_name='webapi test' --data-urlencode comment='sample message.' http://$LB_IP/api/0.0.1/comments
