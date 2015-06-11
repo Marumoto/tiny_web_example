@@ -23,7 +23,7 @@ cd /opt/axsh/tiny-web-example/spec_integration/config
 cp webapi.conf.example webapi.conf
 
 # set LB address to conf files.
-sed -i -e "s|localhost|${LB_IP}|g" /opt/axsh/tiny-web-example/spec_integration/config/webapi.conf
+#sed -i -e "s|localhost|${LB_IP}|g" /opt/axsh/tiny-web-example/spec_integration/config/webapi.conf
 
 #execute test
 cd /opt/axsh/tiny-web-example/spec_integration
